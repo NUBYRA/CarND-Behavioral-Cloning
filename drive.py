@@ -47,7 +47,7 @@ class SimplePIController:
 
 
 controller = SimplePIController(0.1, 0.002)
-set_speed = 9
+set_speed = 20
 controller.set_desired(set_speed)
 
 ## Functions for preprocessing data - crop, resize, YUV channel 
