@@ -9,7 +9,6 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 from keras.layers import Lambda, Conv2D, Flatten, Dense
 from  keras.callbacks import ModelCheckpoint
-%matplotlib inline 
 
 image_height, image_width, image_depth = 66, 200, 3 ## NVIDIA Model image input specification 
 batch_size = 32
@@ -149,11 +148,8 @@ def train_model(data_dir, filepath, batch_size):
                     epochs = 3,
                     callbacks =[checkpoint])
 
- def main():
- 	train_model(data_dir, filepath, batch_size)
+train_model(data_dir, filepath, batch_size)
   
-if __name__== "__main__":
-  main()
 
 
 
