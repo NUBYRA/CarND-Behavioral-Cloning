@@ -44,28 +44,20 @@ class SimplePIController:
         return self.Kp * self.error + self.Ki * self.integral
 
 
-
-
 controller = SimplePIController(0.1, 0.002)
-set_speed = 20
+set_speed = 8
 controller.set_desired(set_speed)
 
-## Functions for preprocessing data - crop, resize, YUV channel 
 def crop_image(image):
-    return image[55:140, :, :]
+    return image[60:-25, :, :]
 
 def resize_image(image):
-    return cv2.resize(image, (200, 66))
-
-def rgb2yuv(image):
-    return cv2.cvtColor(image, cv2.COLOR_RGB2YUV)
+    return cv2.resize(image, (64, 64))
 
 def image_preprocess(image):
-    image = crop_image(image)
-    image = resize_image(image)
-    image = rgb2yuv(image)
-    return image
-
+    img = crop_image(image)
+    img = resize_image(img)
+    return img
 
 @sio.on('telemetry')
 def telemetry(sid, data):
@@ -78,11 +70,10 @@ def telemetry(sid, data):
         speed = data["speed"]
         # The current image from the center camera of the car
         imgString = data["image"]
-        image = Image.open(BytesIO(base64.b64decode(imgString)))  
-        image = np.asarray(image) 
-        image = image_preprocess(image)
-        image = np.array([image]) 
-        steering_angle = float(model.predict(image, batch_size=1))
+        image = Image.open(BytesIO(base64.b64decode(imgString)))
+        image_array = np.asarray(image)
+        img = image_preprocess(image_array)
+        steering_angle = float(model.predict(img[None, :, :, :], batch_size=1))
 
         throttle = controller.update(float(speed))
 
