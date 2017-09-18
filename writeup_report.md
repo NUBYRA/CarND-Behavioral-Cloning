@@ -146,13 +146,7 @@ I used this training data for training the model. The validation set helped dete
 
 ### Track 1: Model making comeplete 1 lap without veering off track. 
 
-<script src="http://vjs.zencdn.net/4.0/video.js"></script>
-
-<video id="Track1" class="video-js vjs-default-skin" controls
-preload="auto" width="320" height="160" poster="./examples/track1.png"
-data-setup="{}">
-<source src="run1.mp4" type='video/mp4'>
-</video>
+[![IMAGE ALT TEXT HERE](./examples/track1.png)](https://www.youtube.com/watch?v=BVe-r_XXTPQ)
 
 #### 5. Future direction for training on Track 2
 
