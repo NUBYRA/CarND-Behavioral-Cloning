@@ -48,7 +48,7 @@ def random_flip(image, steering):
 def random_translation(image, steering, range_x, range_y):
     translation_x = range_x*(np.random.uniform() - .5)
     translation_y = range_y*(np.random.uniform() - .5)
-    steering = steering + translation_x*.002
+    steering = steering + translation_x*.004
     Trans_M = np.float32([[1,0,translation_x],[0,1,translation_y]])
     height, width = image.shape[:2]
     image = cv2.warpAffine(image, Trans_M, (width, height))
@@ -56,14 +56,14 @@ def random_translation(image, steering, range_x, range_y):
 
  def random_brightness(image):
     image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
-    random_bright = 1.0 + 0.4 * (np.random.rand() - 0.5)
+    random_bright = .5 * (np.random.rand() - 0.5)
     image[:,:,2] = image[:,:,2]*random_bright 
     image[:,:,2][image[:,:,2]>255]  = 255
     image = cv2.cvtColor(image, cv2.COLOR_HSV2RGB)
     return image
 
 def random_shadow(image):
-    brightness = 0.5
+    brightness = np.random.uniform(.2, .5)
     image = cv2.cvtColor(image, cv2.COLOR_RGB2HLS)
     x = random.randint(0, image.shape[1])
     y = random.randint(0, image.shape[0])
@@ -113,6 +113,7 @@ def create_train_valid(filepath):
     return train, valid
 
 def COMMA():
+    '''COMMA.ai model'''
     model = Sequential()
     model.add(Lambda(lambda x: x/127.5-1.0, input_shape = (image_height, image_width, image_depth)))
     model.add(Conv2D(16, (8, 8), strides=(4,4), activation='elu', padding = 'same'))
