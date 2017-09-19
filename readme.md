@@ -127,7 +127,7 @@ Data Preprocessing:
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. Data augmentation and preprocessin was applied to the tranining data, while only preprocessing was applied to validation data using batch_generator [model.py line 84-101]. The number of epochs was 3, with sample size of 20000 in each epoch to ensure all left, right and center had a turn of being selected. Number of epochs was chosen to save on time and computation resources, since model was taking over 5 hours. I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
-### Lake Track: Model making comeplete 1 lap without veering off track. 
+#### 4. Lake Track: Model making comeplete 1 lap without veering off track. 
 
 [![IMAGE ALT TEXT HERE](./examples/track1.png)](https://www.youtube.com/watch?v=BVe-r_XXTPQ)
 
