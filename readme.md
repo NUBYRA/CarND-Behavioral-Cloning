@@ -14,9 +14,6 @@ The goals / steps of this project are the following:
 [image3]: ./examples/center.png "Center Image"
 [image4]: ./examples/normal.png "Normal Image"
 [image5]: ./examples/flipped.png "Flipped Image"
-[image6]: ./examples/translate.png "Translate Image"
-[image7]: ./examples/shadow.png "Shadow Image"
-[image8]: ./examples/bright.png "Bright Image"
 [image9]: ./examples/crop.png "Cropped Image"
 [image10]: ./examples/resize.png "Resized Image"
 
@@ -104,7 +101,7 @@ The final model architecture (model.py lines 115-130) consisted of a convolution
 
 #### 3. Creation of the Training Set & Training Process
 
-Only sample data provided by Udacity was used, no additional data was collected. The sample data is only collected from Track 1. To keep vehicle on track and my attempt to generalize to Track 2, relied heavily on data augmentation. 
+Only sample data provided by Udacity was used, no additional data was collected. The sample data is only collected from Track 1 with bias for steering_angle near 0. To generalize, relied on data augmentation. 
 
 Here are examples of a drving image from left, right and center camera:
 
@@ -118,18 +115,6 @@ Data Augmentation:
 
 ![alt text][image4] ![alt text][image5]
 
-3. Random image translation was applied (model.py line 48-55) to optimize recovery from sharp many turns seen on especially Track 2. Below is an original and random translation.
-
-![alt text][image4] ![alt text][image6]
-
-4. Random Shadow was applied (model.py line 65-74) to immitate other driving conditions such as dark pathway. Below is an original and random shadow.
-
-![alt text][image4] ![alt text][image7]
-
-5. Random Brightness was applied (model.py line 57-63) to immitate other driving conditions such as sunny day, rainy day and etc. Below is an original and random brightness.
-
-![alt text][image4] ![alt text][image8]
-
 Data Preprocessing:
 
 1. To focus just on the road the top 60 pixels and bottom 25 pixels were cropped [model.py line 22-23].Below is an original and cropped. 
@@ -142,14 +127,9 @@ Data Preprocessing:
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. Data augmentation and preprocessin was applied to the tranining data, while only preprocessing was applied to validation data using batch_generator [model.py line 84-101]. The number of epochs was 3, with sample size of 20000 in each epoch to ensure all left, right and center had a turn of being selected. Number of epochs was chosen to save on time and computation resources, since model was taking over 5 hours. I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
-#### 4. Test Demonstration of Track 1
-
-### Track 1: Model making comeplete 1 lap without veering off track. 
+### Lake Track: Model making comeplete 1 lap without veering off track. 
 
 [![IMAGE ALT TEXT HERE](./examples/track1.png)](https://www.youtube.com/watch?v=BVe-r_XXTPQ)
 
-#### 5. Future direction for training on Track 2
-
-Data augumentation based on recovery from left/right and flipping 50% of the time leads to the model running on Track 2 80% of the time. Then I added image random trasnlation, shadow and brightness thinking this will help generalize better. To my surprise this made model not drive in Track 2 at all. During this submission I did not work on this any further since running on 3 epochs take 5 hours, same when I try this on AWS g2.2xlarge. My future plan is to go back to only doing augmnetation based on recovery and flipping, increase the number of epochs, reduce the percentage of near 0 steering angle seen to see if model will comeplete Track 2. My thought is that 3 epochs is not enough to collect enough flips and recovery data to generalize to Track 2.
 
 
