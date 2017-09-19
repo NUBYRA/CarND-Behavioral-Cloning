@@ -14,6 +14,7 @@ The goals / steps of this project are the following:
 [image3]: ./examples/center.png "Center Image"
 [image4]: ./examples/normal.png "Normal Image"
 [image5]: ./examples/flipped.png "Flipped Image"
+[image6]: ./examples/bright.png "Bright Image"
 [image9]: ./examples/crop.png "Cropped Image"
 [image10]: ./examples/resize.png "Resized Image"
 
@@ -114,6 +115,10 @@ Data Augmentation:
 2. Image was randomly flipped 50% of the time, with steering angle value being multiplied by -1, the images provided have left turn bias, to generealize images were randomly flipped to also simulate rigth turns. Below is an original and flipped image [model.py Line 42-46].
 
 ![alt text][image4] ![alt text][image5]
+
+3. Random Brightness added to the training images:
+
+![alt text][image4] ![alt text][image6]
 
 Data Preprocessing:
 
